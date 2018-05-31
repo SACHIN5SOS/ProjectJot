@@ -57,10 +57,6 @@ app.use(passport.session());
 app.use(flash());
 
 
-//Use Ideas
-app.use('/ideas',ideas);
-//Use users Routes
-app.use('/users',users);
 
 
 
@@ -90,6 +86,10 @@ app.get('/about', (req,res)=>{
 
 
 
+//Use Ideas
+app.use('/ideas',ideas);
+//Use users Routes
+app.use('/users',users);
 
 
 const port = 5000;
