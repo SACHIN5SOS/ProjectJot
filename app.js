@@ -48,14 +48,28 @@ app.use(session({
     saveUninitialized: true
 }));
 
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // //Connect-Flash Middleware
 app.use(flash());
+
+
+//Use Ideas
+app.use('/ideas',ideas);
+//Use users Routes
+app.use('/users',users);
+
+
 
 //GlobalVariables Middlewares
 app.use(function(req,res,next){
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 }); 
 
@@ -75,11 +89,6 @@ app.get('/about', (req,res)=>{
 });
 
 
-
-//Use Ideas
-app.use('/ideas',ideas);
-//Use users Routes
-app.use('/users',users);
 
 
 
