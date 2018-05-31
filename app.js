@@ -28,11 +28,14 @@ app.use(express.static(path.join(__dirname, './public')));  //Public folder will
 //Method Override Middleware
 app.use(methodOverride('_method'));
 
+//Config Passport
 require('./config/passport')(passport);
 
+//DB config
+const db = require('./config/database');
 
 //Mongoose Middleware
-mongoose.connect('mongodb://localhost/vidjot-dev')
+mongoose.connect(db.mongoURI)
 .then(()=> console.log("Mongoose connected"))
 .catch(err => console.log(err));
 
@@ -92,7 +95,7 @@ app.use('/ideas',ideas);
 app.use('/users',users);
 
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port,()=>
 {
     console.log(`Starting server at ${port}`);
